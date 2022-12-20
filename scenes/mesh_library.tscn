@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://bpk8jt2ovx08g"]
+
+[ext_resource type="Texture2D" uid="uid://cc8xiygof2ibv" path="res://textures/tile.png" id="1_3iris"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dsk60"]
+shading_mode = 0
+albedo_color = Color(0.25098, 0.25098, 0.25098, 1)
+albedo_texture = ExtResource("1_3iris")
+albedo_texture_force_srgb = true
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_y0r1x"]
+material = SubResource("StandardMaterial3D_dsk60")
+size = Vector3(16, 1, 16)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_33ddh"]
+data = PackedVector3Array(-8, 0.5, 8, 8, 0.5, 8, -8, -0.5, 8, 8, 0.5, 8, 8, -0.5, 8, -8, -0.5, 8, 8, 0.5, -8, -8, 0.5, -8, 8, -0.5, -8, -8, 0.5, -8, -8, -0.5, -8, 8, -0.5, -8, 8, 0.5, 8, 8, 0.5, -8, 8, -0.5, 8, 8, 0.5, -8, 8, -0.5, -8, 8, -0.5, 8, -8, 0.5, -8, -8, 0.5, 8, -8, -0.5, -8, -8, 0.5, 8, -8, -0.5, 8, -8, -0.5, -8, 8, 0.5, 8, -8, 0.5, 8, 8, 0.5, -8, -8, 0.5, 8, -8, 0.5, -8, 8, 0.5, -8, -8, -0.5, 8, 8, -0.5, 8, -8, -0.5, -8, 8, -0.5, 8, 8, -0.5, -8, -8, -0.5, -8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3st2s"]
+shading_mode = 0
+albedo_color = Color(0.25098, 0.25098, 0.25098, 1)
+albedo_texture = ExtResource("1_3iris")
+albedo_texture_force_srgb = true
+uv1_scale = Vector3(3, 4, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_po3t0"]
+material = SubResource("StandardMaterial3D_3st2s")
+size = Vector3(16, 1, 35.777)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_2p8y2"]
+data = PackedVector3Array(-8, 0.5, 17.8885, 8, 0.5, 17.8885, -8, -0.5, 17.8885, 8, 0.5, 17.8885, 8, -0.5, 17.8885, -8, -0.5, 17.8885, 8, 0.5, -17.8885, -8, 0.5, -17.8885, 8, -0.5, -17.8885, -8, 0.5, -17.8885, -8, -0.5, -17.8885, 8, -0.5, -17.8885, 8, 0.5, 17.8885, 8, 0.5, -17.8885, 8, -0.5, 17.8885, 8, 0.5, -17.8885, 8, -0.5, -17.8885, 8, -0.5, 17.8885, -8, 0.5, -17.8885, -8, 0.5, 17.8885, -8, -0.5, -17.8885, -8, 0.5, 17.8885, -8, -0.5, 17.8885, -8, -0.5, -17.8885, 8, 0.5, 17.8885, -8, 0.5, 17.8885, 8, 0.5, -17.8885, -8, 0.5, 17.8885, -8, 0.5, -17.8885, 8, 0.5, -17.8885, -8, -0.5, 17.8885, 8, -0.5, 17.8885, -8, -0.5, -17.8885, 8, -0.5, 17.8885, 8, -0.5, -17.8885, -8, -0.5, -17.8885)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r514j"]
+shading_mode = 0
+albedo_color = Color(0.12549, 0.12549, 0.12549, 1)
+albedo_texture = ExtResource("1_3iris")
+albedo_texture_force_srgb = true
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ppgjd"]
+material = SubResource("StandardMaterial3D_r514j")
+size = Vector3(16, 1, 16)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0ktfp"]
+data = PackedVector3Array(-8, 0.5, 8, 8, 0.5, 8, -8, -0.5, 8, 8, 0.5, 8, 8, -0.5, 8, -8, -0.5, 8, 8, 0.5, -8, -8, 0.5, -8, 8, -0.5, -8, -8, 0.5, -8, -8, -0.5, -8, 8, -0.5, -8, 8, 0.5, 8, 8, 0.5, -8, 8, -0.5, 8, 8, 0.5, -8, 8, -0.5, -8, 8, -0.5, 8, -8, 0.5, -8, -8, 0.5, 8, -8, -0.5, -8, -8, 0.5, 8, -8, -0.5, 8, -8, -0.5, -8, 8, 0.5, 8, -8, 0.5, 8, 8, 0.5, -8, -8, 0.5, 8, -8, 0.5, -8, 8, 0.5, -8, -8, -0.5, 8, 8, -0.5, 8, -8, -0.5, -8, 8, -0.5, 8, 8, -0.5, -8, -8, -0.5, -8)
+
+[node name="mesh_library" type="Node3D"]
+
+[node name="tile_gray" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_y0r1x")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="tile_gray"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tile_gray/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_33ddh")
+
+[node name="tile_angled" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.894154, -0.447759, 0, 0.447759, 0.894154, 0, 0, 0)
+mesh = SubResource("BoxMesh_po3t0")
+
+[node name="StaticBody3d" type="StaticBody3D" parent="tile_angled"]
+
+[node name="CollisionShape3d" type="CollisionShape3D" parent="tile_angled/StaticBody3d"]
+shape = SubResource("ConcavePolygonShape3D_2p8y2")
+
+[node name="tile_dark" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ppgjd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="tile_dark"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tile_dark/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_0ktfp")

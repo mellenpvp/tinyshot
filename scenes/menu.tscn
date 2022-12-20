@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://dfo1psau1jd1g"]
+
+[node name="menu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="main" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -165.5
+offset_top = -181.0
+offset_right = 165.5
+offset_bottom = 181.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="network" type="Button" parent="main"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "network"
+
+[node name="menu_2" type="Button" parent="main"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "menu_2"
+
+[node name="menu_3" type="Button" parent="main"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "menu_3"
+
+[node name="network" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -181.0
+offset_right = 96.0
+offset_bottom = 181.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="port" type="Button" parent="network"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "9999"
+
+[node name="join" type="Button" parent="network"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "join"
+
+[node name="host" type="Button" parent="network"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "host"
