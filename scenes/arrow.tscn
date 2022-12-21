@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c53o46p3gpmak"]
 
-[sub_resource type="GDScript" id="GDScript_37lfl"]
+[sub_resource type="GDScript" id="GDScript_2xw1y"]
 script/source = "extends Area3D
 var speed = 1024
 var timer = 0
@@ -15,22 +15,22 @@ func _physics_process(delta):
 		queue_free()
 "
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i068q"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f04xw"]
 shading_mode = 0
 albedo_color = Color(1, 0, 0, 1)
 detail_enabled = true
 
-[sub_resource type="SphereMesh" id="SphereMesh_xmorg"]
-material = SubResource("StandardMaterial3D_i068q")
+[sub_resource type="SphereMesh" id="SphereMesh_va0lg"]
+material = SubResource("StandardMaterial3D_f04xw")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_yc6ik"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_u61oq"]
 
 [node name="ball" type="Area3D"]
-script = SubResource("GDScript_37lfl")
+script = SubResource("GDScript_2xw1y")
 
 [node name="MeshInstance3d" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("SphereMesh_xmorg")
+mesh = SubResource("SphereMesh_va0lg")
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_yc6ik")
+shape = SubResource("SphereShape3D_u61oq")

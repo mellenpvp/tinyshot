@@ -9,17 +9,11 @@ extends Node3D
 @onready var raycast = $player/springarm/camera/raycast
 @onready var muzzle = $player/muzzle
 @onready var animation_tree = $player/animation_tree
-@onready var main = get_node("/root/main/")
-@onready var zip_curve1 = $ziplines/zip1/path.get_curve()
-@onready var zip_curve2 = $ziplines/zip2/path.get_curve()
-@onready var zip_curve3 = $ziplines/zip3/path.get_curve()
-@onready var zip_curve4 = $ziplines/zip4/path.get_curve()
-@onready var zip1 = $ziplines/zip1/path/follow
-@onready var zip2 = $ziplines/zip2/path/follow
-@onready var zip3 = $ziplines/zip3/path/follow
-@onready var zip4 = $ziplines/zip4/path/follow
+@onready var main = get_node("/root/arena/")
+@onready var zip_curve = $zip/path.get_curve()
+@onready var zip = $zip/path/follow
 const arrow = preload("res://scenes/arrow.tscn")
-var speed = 18
+var speed = 20
 var jump_velocity = 46
 var walljump_vector = Vector3.ZERO
 var walljump_speed = 48
@@ -48,18 +42,18 @@ func _ready():
 	camera.fov = 90
 	camera.h_offset = 1.4
 	raycast.transform.origin.x = 1.4
-	$menu/main.visible = false
-	$menu/network.visible = false
+#	$menu/main.visible = false
+#	$menu/network.visible = false
 
 func _physics_process(delta):
-	if in_menu == true:
-		_menu()
-		player.velocity.y -= gravity * delta
-	else:
-		_controls()
-		_movement(delta)
-		_abilities(delta)
-		_menu()
+#	if in_menu == true:
+#		_menu()
+#		player.velocity.y -= gravity * delta
+#	else:
+	_controls()
+	_movement(delta)
+	_abilities(delta)
+#		_menu()
 	player.move_and_slide()
 
 func _controls():
@@ -83,7 +77,7 @@ func _input(event):
 func _movement(delta):
 #walljump
 	if player.is_on_wall():
-		if Input.is_action_just_released("jump"):
+		if Input.is_action_just_pressed("jump"):
 			walljump_vector.x = player.get_wall_normal().x * walljump_speed
 			walljump_vector.z = player.get_wall_normal().z * walljump_speed
 			player.velocity.y = jump_velocity
@@ -101,118 +95,38 @@ func _movement(delta):
 		if is_sliding:
 			is_sliding = false
 		just_landed = false
-		accel = 1.6
-		zip_id = raycast.get_collider()
-		if zip_id == $ziplines/zip1/area3d:
-			var temp_pos = (player.position.y - 12) / 112
-			player.position = Vector3.ZERO
-			player.velocity = Vector3.ZERO
-			main.remove_child(player)
-			player.set_as_top_level(false)
-			zip1.add_child(player)
-			is_zipping = true
-			zip1.set_progress_ratio(temp_pos)
-		if zip_id == $ziplines/zip2/area3d:
-			var temp_pos = (player.position.y - 12) / 112
-			player.position = Vector3.ZERO
-			player.velocity = Vector3.ZERO
-			main.remove_child(player)
-			player.set_as_top_level(false)
-			zip2.add_child(player)
-			is_zipping = true
-			zip2.set_progress_ratio(temp_pos)
-		if zip_id == $ziplines/zip3/area3d:
-			var temp_pos = (player.position.y - 12) / 112
-			player.position = Vector3.ZERO
-			player.velocity = Vector3.ZERO
-			main.remove_child(player)
-			player.set_as_top_level(false)
-			zip3.add_child(player)
-			is_zipping = true
-			zip3.set_progress_ratio(temp_pos)
-		if zip_id == $ziplines/zip4/area3d:
-			var temp_pos = (player.position.y - 12) / 112
-			player.position = Vector3.ZERO
-			player.velocity = Vector3.ZERO
-			main.remove_child(player)
-			player.set_as_top_level(false)
-			zip4.add_child(player)
-			is_zipping = true
-			zip4.set_progress_ratio(temp_pos)
+		var temp_pos = (player.position.y - 12) / 64
+		if temp_pos < 0:
+			temp_pos = 0
+		player.position = Vector3.ZERO
+		player.velocity = Vector3.ZERO
+		main.remove_child(player)
+		player.set_as_top_level(false)
+		zip.add_child(player)
+		is_zipping = true
+		zip.set_progress_ratio(temp_pos)
 	if is_zipping == true:
 		model.rotation.y = springarm.rotation.y + 3.14159
 		animation_tree["parameters/run/active"] = false
 		animation_tree["parameters/jump/active"] = false
 		animation_tree["parameters/fall/active"] = false
-		if zip_id == $ziplines/zip1/area3d:
-			zip1.set_progress_ratio(zip1.get_progress_ratio() + delta / 3)
-			player.global_position.x = -56
-			player.global_position.z = -56
-			if Input.is_action_just_released("jump") or zip1.get_progress_ratio() >= 1:
-				var temp_pos = (zip1.get_progress_ratio() * 112) + 12
-				var temp_dir = springarm.rotation
-				if zip1.get_child_count() > 0:
-					zip1.remove_child(player)
-					main.add_child(player)
-				is_zipping = false
-				player.set_as_top_level(true)
-				player.position.y = temp_pos
-				player.position.x = -56
-				player.position.z = -56
-				player.velocity.y = jump_velocity
-				springarm.rotation = temp_dir
-		if zip_id == $ziplines/zip2/area3d:
-			zip2.set_progress_ratio(zip2.get_progress_ratio() + delta / 3)
-			player.global_position.x = 56
-			player.global_position.z = -56
-			if Input.is_action_just_released("jump") or zip2.get_progress_ratio() >= 1:
-				var temp_pos = (zip2.get_progress_ratio() * 112) + 12
-				var temp_dir = springarm.rotation
-				if zip2.get_child_count() > 0:
-					zip2.remove_child(player)
-					main.add_child(player)
-				is_zipping = false
-				player.set_as_top_level(true)
-				player.position.y = temp_pos
-				player.position.x = 56
-				player.position.z = -56
-				player.velocity.y = jump_velocity
-				springarm.rotation = temp_dir
-		if zip_id == $ziplines/zip3/area3d:
-			zip3.set_progress_ratio(zip3.get_progress_ratio() + delta / 3)
-			player.global_position.x = -56
-			player.global_position.z = 56
-			if Input.is_action_just_released("jump") or zip3.get_progress_ratio() >= 1:
-				var temp_pos = (zip3.get_progress_ratio() * 112) + 12
-				var temp_dir = springarm.rotation
-				if zip3.get_child_count() > 0:
-					zip3.remove_child(player)
-					main.add_child(player)
-				is_zipping = false
-				player.set_as_top_level(true)
-				player.position.y = temp_pos
-				player.position.x = -56
-				player.position.z = 56
-				player.velocity.y = jump_velocity
-				springarm.rotation = temp_dir
-		if zip_id == $ziplines/zip4/area3d:
-			zip4.set_progress_ratio(zip4.get_progress_ratio() + delta / 3)
-			player.global_position.x = 56
-			player.global_position.z = 56
-			print(zip4.get_progress_ratio())
-			if Input.is_action_just_released("jump") or zip4.get_progress_ratio() >= 1:
-				var temp_pos = (zip4.get_progress_ratio() * 112) + 12
-				var temp_dir = springarm.rotation
-				if zip4.get_child_count() > 0:
-					zip4.remove_child(player)
-					main.add_child(player)
-				is_zipping = false
-				player.set_as_top_level(true)
-				player.position.y = temp_pos
-				player.position.x = 56
-				player.position.z = 56
-				player.velocity.y = jump_velocity
-				springarm.rotation = temp_dir
+		zip.set_progress_ratio(zip.get_progress_ratio() + delta)
+		player.global_position.x = 0
+		player.global_position.z = 0
+		if Input.is_action_just_pressed("jump") or zip.get_progress_ratio() >= 1:
+			var temp_pos = (zip.get_progress_ratio() * 64) + 12
+			var temp_dir = springarm.rotation
+			if zip.get_child_count() > 0:
+				zip.remove_child(player)
+				main.add_child(player)
+			is_zipping = false
+			player.set_as_top_level(true)
+#			accel = 1.6
+			player.position.y = temp_pos
+			player.position.x = 0
+			player.position.z = 0
+			player.velocity.y = jump_velocity
+			springarm.rotation = temp_dir
 #slide
 	if player.is_on_floor():
 		if just_landed == false:
@@ -242,7 +156,7 @@ func _movement(delta):
 			else:
 				animation_tree["parameters/run/active"] = false
 #jump
-		if Input.is_action_just_released("jump"):
+		if Input.is_action_just_pressed("jump"):
 			animation_tree["parameters/slide/active"] = false
 			animation_tree["parameters/jump/active"] = true
 			player.velocity.y = jump_velocity
@@ -275,14 +189,12 @@ func _movement(delta):
 func _abilities(delta):
 #bow
 	if Input.is_action_pressed("shoot"):
-		speed = 16
 		if Globals.charge < 1:
 			Globals.charge += delta
 			camera.fov -= delta * 20
 		if not is_sliding:
 			animation_tree["parameters/aim/active"] = true
 	if Input.is_action_just_released("shoot"):
-		speed = 24
 		camera.fov = 80
 		muzzle.rotation = springarm.rotation
 		muzzle.rotation.x += 0.026
@@ -299,28 +211,28 @@ func _abilities(delta):
 		camera.h_offset *= -1
 		raycast.transform.origin.x *= -1
 
-func _menu():
-	if Input.is_action_just_pressed("menu"):
-		if in_network == true:
-			$menu/network.visible = false
-			$menu/main.visible = true
-			in_menu = true
-			in_network = false
-		else:
-			if $menu/main.visible == false:
-				in_menu = true
-				$menu/main.visible = true
-				$player/springarm/camera/crosshair.visible = false
-				Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
-				player.velocity.x = 0
-				player.velocity.z = 0
-			else:
-				in_menu = false
-				$menu/main.visible = false
-				$player/springarm/camera/crosshair.visible = true
-				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-func _on_network_pressed():
-	in_network = true
-	$menu/main.visible = false
-	$menu/network.visible = true
+#func _menu():
+#	if Input.is_action_just_pressed("menu"):
+#		if in_network == true:
+#			$menu/network.visible = false
+#			$menu/main.visible = true
+#			in_menu = true
+#			in_network = false
+#		else:
+#			if $menu/main.visible == false:
+#				in_menu = true
+#				$menu/main.visible = true
+#				$player/springarm/camera/crosshair.visible = false
+#				Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+#				player.velocity.x = 0
+#				player.velocity.z = 0
+#			else:
+#				in_menu = false
+#				$menu/main.visible = false
+#				$player/springarm/camera/crosshair.visible = true
+#				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+#
+#func _on_network_pressed():
+#	in_network = true
+#	$menu/main.visible = false
+#	$menu/network.visible = true
